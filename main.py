@@ -3,7 +3,8 @@
  
 import tweepy, time, sys
  
-argfile = str(sys.argv[1])
+tweetsFile = str(sys.argv[1])
+minutes = str(sys.argv[2])
  
 #Connect with Twitter API:
 CONSUMER_KEY = ''
@@ -14,11 +15,11 @@ auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
  
-filename=open(argfile,'r')
+filename=open(tweetsFile,'r')
 f=filename.readlines()
 filename.close()
  
-#Tweet every 15 minutes
+#Tweets every (user inputted) minutes
 for line in f:
     api.update_status(status=line)
-    time.sleep(900)
+    time.sleep(minutes / 60)
